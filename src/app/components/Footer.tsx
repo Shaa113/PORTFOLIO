@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
+﻿import { ArrowUpRight } from "lucide-react";
 
 const socialLinks = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/disha-mehendiratta-029426322", external: true },
