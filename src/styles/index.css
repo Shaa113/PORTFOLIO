@@ -1,0 +1,198 @@
+@import './fonts.css';
+@import './globals.css';
+@import './tailwind.css';
+@import './theme.css';
+
+/* Smooth scrolling — handled by Lenis, NOT native scroll-behavior */
+html {
+  /* Do NOT set scroll-behavior: smooth here — Lenis handles momentum scrolling */
+  /* NOTE: overflow:hidden is intentionally NOT set here — it breaks motion/react useScroll */
+}
+
+/* Lenis smooth scroll root */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a0f0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #8b2635, #6b1f2a);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #6b1f2a, #8b2635);
+}
+
+/* Selection color */
+::selection {
+  background-color: #8b2635;
+  color: #f5e6d3;
+}
+
+/* Prevent horizontal scroll */
+body {
+  overflow-x: hidden;
+}
+
+/* Glassmorphism utility class */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Animation for fade in on scroll */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-loader-ethereal {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+.page-loader-ethereal__vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(5, 3, 2, 0) 0%, rgba(5, 3, 2, 0) 28%, rgba(5, 3, 2, 0.72) 68%, #050302 100%);
+}
+
+.page-loader-ethereal__field {
+  position: absolute;
+  left: -8%;
+  right: -8%;
+  top: 50%;
+  height: 44vh;
+  transform: translate3d(0, -50%, 0);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+}
+
+.page-loader-ethereal__pillar {
+  position: absolute;
+  inset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-loader-ethereal,
+  .page-loader-ethereal__vignette,
+  .page-loader-ethereal__field,
+  .page-loader-ethereal__pillar {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ─── GSAP Animation Utilities ──────────────────────────────────────────────── */
+
+/* Hero character stagger — overflow must be hidden to clip sliding chars */
+#home h1 {
+  overflow: hidden;
+}
+
+/* Clip containers for reveal-line class added by SplitText */
+.split-line {
+  overflow: hidden;
+}
+
+/* Section draw-line: transform scales from 0 (set by GSAP), so must be block */
+.section-draw-line {
+  transform-origin: left center;
+  will-change: transform;
+}
+
+/* Hero separator */
+.hero-separator {
+  transform-origin: left center;
+  will-change: transform;
+}
+
+/* Magnetic buttons - smooth GPU transform */
+[data-magnetic] {
+  will-change: transform;
+  display: inline-flex;
+}
+
+/* Reveal line wrapper inserted by GSAP SplitText */
+.reveal-line {
+  display: block;
+  overflow: hidden;
+}
+
+/* Prevent flash of unstyled chars before GSAP fires */
+#home h1 .hero-char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* Project card GPU hint */
+#projects article {
+  will-change: transform, opacity;
+}
+
+
+/* Skills tags */
+#about .flex.flex-wrap.gap-2 span {
+  will-change: transform, opacity;
+}
+
+/* ─── Horizontal Scroll Showcase ──────────────────────────────────────────── */
+
+/* Ensure sticky positioning inside the projects section works */
+#projects {
+  overflow: visible;
+}
+
+/* GPU-accelerate the horizontal motion track */
+#projects-inner .will-change-transform {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Prevent horizontal overflow during the sticky scroll */
+#projects-inner > div > div {
+  overflow: hidden;
+}
+
+

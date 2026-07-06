@@ -1,0 +1,70 @@
+﻿.footer-shell {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #050505;
+  overflow: hidden;
+}
+
+/* Hands placement wrapper layout */
+.footer-hands {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  pointer-events: none; /* Allows cursor calculation below them */
+}
+
+.footer-hand {
+  width: 35%;
+  height: auto;
+  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.footer-hand img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Base states: Keep the hands hidden off screen left/right until visible */
+.footer-hand--left {
+  transform: translateX(-150%);
+}
+
+.footer-hand--right {
+  transform: translateX(150%);
+}
+
+/* When intersection trigger fires, reset their primary transformation positions */
+.footer-shell.is-visible .footer-hand--left {
+  transform: translateX(0);
+}
+
+.footer-shell.is-visible .footer-hand--right {
+  transform: translateX(0);
+}
+
+/* Text reveal wrapper masks layout */
+.footer-type-stage {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4rem;
+  overflow: hidden; /* Clips letters so they "emerge" out of thin air */
+}
+
+.footer-name {
+  font-size: 11vw;
+  text-transform: uppercase;
+  line-height: 0.9;
+}
